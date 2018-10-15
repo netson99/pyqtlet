@@ -20,6 +20,15 @@ class Marker(Layer):
         self.runJavaScript(js)
 
     def setOpacity(self, opacity):
-        js = '{layerName}.setOpacity({latLng})'.format(
+        js = '{layerName}.setOpacity({opacity})'.format(
                 layerName=self._layerName, opacity=opacity)
+        self.runJavaScript(js)
+
+    def openPopup(self):
+        js = '{layerName}.openPopup()'.format(layerName=self._layerName)
+        self.runJavaScript(js)
+        
+    def setStyle(self, styleNew):
+        js = '{layerName}.setStyle({style})'.format(
+                layerName=self._layerName, style=styleNew)
         self.runJavaScript(js)

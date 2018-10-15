@@ -15,3 +15,16 @@ class CircleMarker(Path):
         leafletJsObject += ')'
         self._createJsObject(leafletJsObject)
 
+    def setLatLng(self, latLng):
+        js = '{layerName}.setLatLng({latLng})'.format(
+                layerName=self._layerName, latLng=latLng)
+        self.runJavaScript(js)
+        
+    def setStyle(self, styleNew):
+        js = '{layerName}.setStyle({style})'.format(
+                layerName=self._layerName, style=styleNew)
+        self.runJavaScript(js)
+        
+    def openPopup(self):
+        js = '{layerName}.openPopup()'.format(layerName=self._layerName)
+        self.runJavaScript(js)

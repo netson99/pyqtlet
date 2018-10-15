@@ -1,6 +1,7 @@
 from .map import Map
-from .layer import LayerGroup, FeatureGroup, imageOverlay
+from .layer import LayerGroup, FeatureGroup, imageOverlay, GeoJSON
 from .layer.tile import TileLayer
+#from .layer.geoJSON import GeoJSON
 from .layer.marker import Marker
 from .layer.vector import Circle, CircleMarker, Polygon, Polyline, Rectangle
 from .control import Control
@@ -11,6 +12,7 @@ class L:
     """
     map = Map
     tileLayer = TileLayer
+    geoJSON = GeoJSON
     imageOverlay = imageOverlay
     marker = Marker
     circleMarker = CircleMarker

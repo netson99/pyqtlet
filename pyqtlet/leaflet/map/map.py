@@ -28,6 +28,8 @@ class Map(Evented):
    
     clicked = pyqtSignal(dict)
     zoom = pyqtSignal(dict)
+    moveend = pyqtSignal(dict)
+    mouseover = pyqtSignal(dict)
     drawCreated = pyqtSignal(dict)
 
     @property
@@ -58,6 +60,16 @@ class Map(Evented):
     def _onZoom(self, event):
         self._logger.debug('map zoom. event: {event}'.format(event=event))
         self.zoom.emit(self._qJsonValueToDict(event))
+        
+    @pyqtSlot(QJsonValue)
+    def _onMoveEnd(self, event):
+        self._logger.debug('map moveend. event: {event}'.format(event=event))
+        self.moveend.emit(self._qJsonValueToDict(event))
+
+    @pyqtSlot(QJsonValue)
+    def _onMouseOver(self, event):
+        self._logger.debug('map mouse over. event: {event}'.format(event=event))
+        self.mouseover.emit(self._qJsonValueToDict(event))
 
     def __init__(self, mapWidget, options=None):
         '''
@@ -85,6 +97,8 @@ class Map(Evented):
         self._initJs()
         self._connectEventToSignal('click', '_onClick')
         self._connectEventToSignal('zoom', '_onZoom')
+        self._connectEventToSignal('moveend', '_onMoveEnd')
+        self._connectEventToSignal('mouseover', '_onMouseOver')
         self._connectEventToSignal('draw:created', '_onDrawCreated')
 
     def _initJs(self):
